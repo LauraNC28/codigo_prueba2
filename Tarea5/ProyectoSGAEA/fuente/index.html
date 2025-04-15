@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión Académica de Estudiantes y Asignaturas</title>
+    <script src="./src/app.js" type="module" defer></script>
+    <link rel="stylesheet" href="./src/css/estilos.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sistema de Gestión Académica de Estudiantes y Asignaturas</h1>
+        
+        <div class="menu">
+            <button id="agregarEstudianteBtn">Agregar Estudiante</button>
+            <button id="eliminarEstudianteBtn">Eliminar Estudiante</button>
+            <button id="matricularEstudianteBtn">Matricular Estudiante</button>
+            <button id="desMatricularEstudianteBtn">Desmatricular Estudiante</button>
+            <button id="aniadirCalificacionBtn">Añadir Calificación</button>
+            <button id="calcularPromedioBtn">Calcular Promedio</button>
+            <button id="buscarAsignaturasbtn">Buscar Asignaturas</button>
+            <button id="mostrarEstudiantesbtn">Mostrar Estudiantes</button>
+            <button id="buscarEstudiantebtn">Buscar Estudiantes</button>
+            <button id="promedioGeneral">Promedio General</button>
+        </div>
+
+        <!-- Formulario para agregar estudiantes -->
+        <div id="formularioAgregarEstudiante">
+            <h2>Agregar Nuevo Estudiante</h2>
+            <form id="nuevoEstudianteForm">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+                <div class="error-container" id="error-nombre"></div>
+        
+                <label for="edad">Edad:</label>
+                <input type="number" id="edad" name="edad" required>
+                <div class="error-container" id="error-edad"></div>
+        
+                <h3>Dirección</h3>
+                <label for="calle">Calle:</label>
+                <input type="text" id="calle" name="calle" required>
+                <div class="error-container" id="error-calle"></div>
+        
+                <label for="numero">Número:</label>
+                <input type="text" id="numero" name="numero" required>
+                <div class="error-container" id="error-numero"></div>
+        
+                <label for="piso">Piso:</label>
+                <input type="text" id="piso" name="piso">
+                <div class="error-container" id="error-piso"></div>
+        
+                <label for="codigoPostal">Código Postal:</label>
+                <input type="text" id="codigoPostal" name="codigoPostal" required>
+                <div class="error-container" id="error-codigoPostal"></div>
+        
+                <label for="provincia">Provincia:</label>
+                <input type="text" id="provincia" name="provincia" required>
+                <div class="error-container" id="error-provincia"></div>
+        
+                <label for="localidad">Localidad:</label>
+                <input type="text" id="localidad" name="localidad" required>
+                <div class="error-container" id="error-localidad"></div>
+        
+                <button type="submit">Guardar Estudiante</button>
+                <button type="button" id="cancelarForm">Cancelar</button>
+            </form>
+        </div>
+
+        <!-- Formulario para eliminar estudiantes -->
+        <div id="formularioEliminarEstudiante" class="hidden">
+            <h2>Eliminar Estudiante</h2>
+            <form id="eliminarEstudianteForm">
+                <label for="nombreEliminar">Nombre del Estudiante:</label>
+                <input type="text" id="nombreEliminar" name="nombreEliminar" required>
+                <div class="error-container" id="error-nombreEliminar"></div>
+                <button type="submit">Eliminar Estudiante</button>
+                <button type="button" id="cancelarForm">Cancelar</button>
+            </form>
+        </div>
+
+        <!-- Formulario para matricular estudiantes -->
+        <div id="formularioMatricularEstudiante" class="hidden">
+            <h2>Matricular Estudiante en Asignatura</h2>
+            <form id="matricularEstudianteForm">
+                <label for="estudianteid">ID del Estudiante:</label>
+                <input type="number" id="estudianteid" name="estudianteid" required>
+                <div class="error-container" id="error-estudianteid"></div>
+        
+                <label for="asignaturaMatricular">Nombre de la Asignatura:</label>
+                <input type="text" id="asignaturaMatricular" name="asignaturaMatricular" required>
+                <div class="error-container" id="error-asignaturaMatricular"></div>
+        
+                <label for="Calificaciones">Calificación:</label>
+                <input type="number" id="Calificaciones" name="Calificaciones" required>
+                <div class="error-container" id="error-Calificaciones"></div>
+        
+                <button type="submit">Matricular Estudiante</button>
+                <button type="button" id="cancelarForm">Cancelar</button>
+            </form>
+        </div>
+
+        <!-- Formulario para desmatricular estudiantes -->
+        <div id="formularioDesMatricularEstudiante" class="hidden">
+            <h2>Desmatricular Estudiante en Asignatura</h2>
+            <form id="desMatricularEstudianteForm">
+                <label for="estudianteid">ID del Estudiante:</label>
+                <input type="number" id="estudianteid" name="estudianteid" required>
+                <div class="error-container" id="error-estudianteid"></div>
+        
+                <label for="asignaturaMatricular">Nombre de la Asignatura:</label>
+                <input type="text" id="asignaturaMatricular" name="asignaturaMatricular" required>
+                <div class="error-container" id="error-asignaturaMatricular"></div>
+        
+                <button type="submit">Desmatricular Estudiante</button>
+                <button type="button" id="cancelarForm">Cancelar</button>
+            </form>
+        </div>
+
+        <!-- Formulario para añadir calificación -->
+        <div id="formularioaniadirCalifiacion" class="hidden">
+            <h2>Añadir Calificación</h2>
+            <form id="aniadirCalificacionform">
+                <label for="nombreEstudiante">Nombre del Estudiante:</label>
+                <input type="text" id="nombreEstudiante" name="nombreEstudiante" required>
+                <div class="error-container" id="error-nombreEstudiante"></div>
+        
+                <label for="asignatura">Nombre de la Asignatura:</label>
+                <input type="text" id="asignatura" name="asignatura" required>
+                <div class="error-container" id="error-asignatura"></div>
+        
+                <label for="califiaciones">Calificación:</label>
+                <input type="number" id="califiaciones" name="califiaciones" required>
+                <div class="error-container" id="error-califiaciones"></div>
+        
+                <button type="submit">Añadir Calificación</button>
+                <button type="button" id="cancelarForm">Cancelar</button>
+            </form>
+        </div>
+
+        <!-- Formulario para calcular promedio -->
+        <div id="formulariocalcularPromedio" class="hidden">
+            <h2>Calcular Promedio</h2>
+            <form id="calcularPromedioform">
+                <label for="nombreEstudiantee">Nombre del Estudiante:</label>
+                <input type="text" id="nombreEstudiantee" name="nombreEstudiantee" required>
+                <div class="error-container" id="error-nombreEstudiantee"></div>
+                <button type="submit">Calcular Promedio</button>
+                <button type="button" id="cancelarForm">Cancelar</button>
+            </form>
+        </div>
+
+        <!-- Formulario para buscar asignaturas -->
+        <div id="formulariobuscarAsignaturas" class="hidden">
+            <h2>Buscar Asignatura</h2>
+            <form id="buscarAsignaturasform">
+                <label for="asignaturasNombre">Asignatura:</label>
+                <input type="text" id="asignaturasNombre" name="asignaturasNombre" required>
+                <div class="error-container"></div>
+
+                <button type="submit">Buscar Asignatura</button>
+                <button type="button" id="cancelarForm">Cancelar</button>
+            </form>
+        </div>
+
+        <!-- Formulario para mostrar estudiantes -->
+        <div id="formularioMostrarEstudiantes" class="hidden">
+            <h2>Mostrar Estudiante</h2>
+            <form id="mostrarEstudiantesform">
+                <label for="estudiantesMostrar">Estudiante:</label>
+                <input type="text" id="estudiantesMostrar" name="estudiantesMostrar" required>
+                <div class="error-container"></div>
+
+                <button type="submit">Mostrar Estudiante</button>
+                <button type="button" id="cancelarForm">Cancelar</button>
+            </form>
+        </div>
+
+        <!-- Formulario para buscar estudiantes -->
+        <div id="formularioBuscarEstudiante" class="hidden">
+            <h2>Buscar Estudiante</h2>
+            <form id="buscarEstudianteform">
+                <label for="estudianteBuscar">Nombre del Estudiante:</label>
+                <input type="text" id="estudianteBuscar" name="estudianteBuscar" required>
+                <div class="error-container"></div>
+
+                <button type="submit">Buscar Estudiante</button>
+                <button type="button" id="cancelarForm">Cancelar</button>
+            </form>
+        </div>
+
+        <!-- Contenedor para mostrar resultados -->
+        <div id="resultadoContainer"></div>
+        <!-- Contenedor para la lista de estudiantes -->
+        <div id="listaEstudiantesContainer"></div>
+    </div>
+    <div id="resultadoBusqueda" class="hidden"></div>
+
+    
+
+
+
+    <!-- Menú principal 
+    <div id="menu-principal">
+        <button id="btn-estudiantes">Gestionar Estudiantes</button>
+        <button id="btn-asignaturas">Gestionar Asignaturas</button>
+        <button id="btn-reporte">Ver Reporte General</button>
+    </div>-->
+
+    <!-- Sección para gestionar estudiantes 
+    <div id="gestion-estudiantes" class="hidden">
+        <h2>Gestión de Estudiantes</h2>
+        <form id="form-estudiantes">-->
+            <!-- Fase 1
+            <div class="fase fase-1">
+                <input type="text" id="nombre-estudiante" placeholder="Nombre del estudiante" required>
+                <input type="number" id="edad-estudiante" placeholder="Edad del estudiante" required>
+                <button type="button" class="btn-siguiente" data-fase="1">Siguiente</button>
+            </div> -->
+            <!-- Fase 2
+            <div class="fase fase-2 hidden">
+                <input type="text" id="calle-estudiante" placeholder="Calle" required>
+                <input type="text" id="numero-estudiante" placeholder="Número" required>
+                <input type="text" id="piso-estudiante" placeholder="Piso (opcional)">
+                <input type="text" id="codigo-postal-estudiante" placeholder="Código Postal" required>
+                <input type="text" id="provincia-estudiante" placeholder="Provincia" required>
+                <input type="text" id="localidad-estudiante" placeholder="Localidad" required>
+                <button type="submit">Guardar</button>
+            </div>
+        </form>
+        <ul id="lista-estudiantes"></ul>
+        <button id="volver-menu1">Volver</button>
+    </div> -->
+
+    <!-- Sección para gestionar asignaturas
+    <div id="gestion-asignaturas" class="hidden">
+        <h2>Gestión de Asignaturas</h2>
+        <form id="form-asignaturas">
+            <input type="text" id="nombre-asignatura" placeholder="Nombre de la asignatura" required>
+            <button type="submit">Añadir Asignatura</button>
+        </form>
+        <input type="text" id="buscar-asignatura" placeholder="Buscar asignatura">
+        <button id="btn-buscar-asignatura">Buscar</button>
+        <ul id="lista-asignaturas"></ul>
+        <button id="volver-menu2">Volver</button>
+    </div> -->
+
+    <!-- Sección para ver reporte general
+    <div id="reporte-general" class="hidden">
+        <h2>Reporte General</h2>
+        <p id="contenido-reporte">No hay datos disponibles.</p>
+        <button id="volver-menu3">Volver</button>
+    </div> -->
+
+</body>
+</html>
